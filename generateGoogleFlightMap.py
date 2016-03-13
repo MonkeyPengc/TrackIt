@@ -6,7 +6,7 @@ import csv
 import argparse
 import os
 
-
+## function that gets path map using Google map API
 def mark_static_google_map(mapname, center=None, zoom=16,
                            imgsize="640x640", imgformat="png", maptype="satellite",
                            f=None, flightpath2=None, markers=None ):
@@ -24,8 +24,7 @@ def mark_static_google_map(mapname, center=None, zoom=16,
     # if center and zoom  are not given, the map will show all marker locations
     if center != None:
         req += "center=%s&" % center
-
-
+        
     req += "zoom=%i&" % zoom
     req += "size=%s&" % imgsize  # tuple of ints, up to 640 by 640
     req += "format=%s&" % imgformat  # jpeg by default
@@ -35,19 +34,19 @@ def mark_static_google_map(mapname, center=None, zoom=16,
         req += "&path=color:0xff0000|weight:5"
             for location in f:
                 req += "%s" % location
-
-
+                
     # add markers (lat and lon)
     if markers != None:
         for marker in markers:
             req += "%s&" % marker
+    req += "&sensor=true"
     
     # get remote data and save it to a local path
-    req += "&sensor=true"
     server_image = mapname + "."+imgformat
     urllib.urlretrieve(req, server_image)
 
 
+## function that writes path location
 def parseFlightFile(filename):
     # query location data from input file
     
@@ -61,8 +60,6 @@ def parseFlightFile(filename):
             if not line:
                 continue
             gps = line.replace(',',' ').split()
-            print(gps)
+            #print(gps)
             path.append("|" + '{0}, {1}'.format(gps[0], gps[1]))
     return path
-
-
