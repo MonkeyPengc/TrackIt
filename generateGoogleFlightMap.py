@@ -32,8 +32,8 @@ def mark_static_google_map(mapname, center=None, zoom=16,
 
     if f != None:
         req += "&path=color:0xff0000|weight:5"
-            for location in f:
-                req += "%s" % location
+        for location in f:
+          req += "%s" % location
                 
     # add markers (lat and lon)
     if markers != None:
