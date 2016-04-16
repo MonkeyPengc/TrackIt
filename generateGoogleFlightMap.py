@@ -7,7 +7,7 @@ import argparse
 import os
 
 ## function that gets path map using Google map API
-def mark_static_google_map(mapname, center=None, zoom=16,
+def mark_static_google_map(mapname, center=None, zoom=18,
                            imgsize="640x640", imgformat="png", maptype="satellite",
                            f=None, flightpath2=None, markers=None ):
     
